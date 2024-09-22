@@ -62,8 +62,8 @@ public class StartedController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"), bundle);
             Parent root = loader.load();
 
-            LoginController controller = loader.getController();
-            controller.setBundle(bundle);
+            // LoginController controller = loader.getController();
+            // controller.setBundle(bundle);
 
             Stage stage = (Stage) continueButton.getScene().getWindow();
             Scene scene = new Scene(root);

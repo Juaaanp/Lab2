@@ -39,6 +39,10 @@ public class LoginController {
         ArrayList<LocalUser> localUsers = (ArrayList<LocalUser>) Utilities.getInstance()
                 .deserializeObjectXML("localUsers.xml");
 
+        @SuppressWarnings("unchecked")
+        ArrayList<LocalUser> localUsersDat = (ArrayList<LocalUser>) Utilities.getInstance().deserializeObject("localUsersDat.dat");
+
+        localUsers.addAll(localUsersDat);
         if (evt.equals(logIn)) {
             if (!idTF.getText().isEmpty()) {
                 boolean userFound = false;
@@ -96,8 +100,8 @@ public class LoginController {
             loadStage("signUp.fxml", event, bundle);
         }
     }
-    public void setBundle(ResourceBundle bundle) {
-        this.bundle= bundle;
-    }
+    // public void setBundle(ResourceBundle bundle) {
+    //     this.bundle= bundle;
+    // }
 }
 
