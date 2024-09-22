@@ -44,9 +44,9 @@ public class LoginController {
                 boolean userFound = false;
                 for (LocalUser localUser : localUsers) {
                     if (localUser.getId().equals(idTF.getText())) {
-                        // if (bundle == null) {
-                        //     bundle = App.getBundle();
-                        // }
+                        if (bundle == null) {
+                            bundle = App.getBundle();
+                        }
                         loadStage("user.fxml", event, bundle);
                         userFound = true;
                         break;

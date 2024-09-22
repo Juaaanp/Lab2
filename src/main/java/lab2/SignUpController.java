@@ -50,22 +50,43 @@ public class SignUpController implements Initializable {
 
         LocalUser localUser = new LocalUser(id, name, email, role);
         Utilities.getInstance().writeLog("New User created.",Level.INFO);
+        
         try {
-            Utilities.getInstance().writeLog("Searching for the User List.",Level.INFO);
-            localUsers = (ArrayList<LocalUser>) Utilities.getInstance().deserializeObjectXML("localUsers.xml");
+            Utilities.getInstance().writeLog("Searching for the User List.", Level.INFO);
+            // Deserialize existing users from both XML and DAT files
+            ArrayList<LocalUser> localUsersDat = (ArrayList<LocalUser>) Utilities.getInstance().deserializeObject("localUsersDat.dat");
+            ArrayList<LocalUser> localUsersXml = (ArrayList<LocalUser>) Utilities.getInstance().deserializeObjectXML("localUsers.xml");
+
+            // Add the users from both formats into the main user list
+            localUsers.addAll(localUsersDat);
+            localUsers.addAll(localUsersXml);
         } catch (FileNotFoundException e) {
             localUsers = new ArrayList<>();
-            Utilities.getInstance().writeLog("No Users List found: " + e.getMessage() , Level.WARNING);
+            Utilities.getInstance().writeLog("No Users List found: " + e.getMessage(), Level.WARNING);
         }
+
         localUsers.add(localUser);
 
-        Utilities.getInstance().serializeObject("localUsers.xml", localUsers);
+        // For try out the serialization of the two objects, we dediced to split the list in half:
+        // one half for XML, the other for DAT
+        int halfSize = localUsers.size() / 2;
+        ArrayList<LocalUser> xmlUsers = new ArrayList<>(localUsers.subList(0, halfSize));
+        ArrayList<LocalUser> datUsers = new ArrayList<>(localUsers.subList(halfSize, localUsers.size()));
 
+        // Serialization half of the users in XML format
+        Utilities.getInstance().serializeObjectXML("localUsers.xml", xmlUsers);
+        Utilities.getInstance().writeLog("Serialized half of users to XML format.", Level.INFO);
+
+        // Serialization for the half of the users in DAT format
+        Utilities.getInstance().serializeObject("localUsersDat.dat", datUsers);
+        Utilities.getInstance().writeLog("Serialized half of users to DAT format.", Level.INFO);
+
+        // Confirmation message
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setTitle("Info");
         alert.setContentText("You have been registered successfully");
-        Utilities.getInstance().writeLog("User added correctly to the users List.",Level.INFO);
+        Utilities.getInstance().writeLog("User added correctly to the users List.", Level.INFO);
         alert.showAndWait();
     }
 
