@@ -1,0 +1,10 @@
+Sep 21, 2024 11:16:44 PM lab2.Utilities writeLog
+INFO: Language updated successfully
+Sep 21, 2024 11:16:49 PM lab2.Utilities writeLog
+INFO: Language updated successfully
+Sep 21, 2024 11:16:57 PM lab2.Utilities writeLog
+INFO: Continue button pressed, moving to the Login Scene.
+Sep 21, 2024 11:17:05 PM lab2.Utilities writeLog
+INFO: Deserializing object from XML file: localUsers.xml
+Sep 21, 2024 11:17:05 PM lab2.Utilities writeLog
+SEVERE: Failed to deserialize object from XML: localUsers.xml (The system cannot find the file specified)

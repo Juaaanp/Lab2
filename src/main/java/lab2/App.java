@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class App extends Application {
     private static ResourceBundle bundle;
@@ -19,11 +20,10 @@ public class App extends Application {
         Locale locale = new Locale("en", "US");
         bundle = ResourceBundle.getBundle("lab2.messages", locale);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"), bundle);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("started-menu.fxml"), bundle);
         Parent root = loader.load();
 
-        LoginController controller = loader.getController();
-        controller.setResourceBundle(bundle);
+        // StartedController controller = loader.getController();
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

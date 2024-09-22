@@ -1,0 +1,25 @@
+.standard-choice-menu{
+    -fx-background-color: rgb(222, 247, 255);
+    -fx-font-size: 14px; 
+}
+.regular-label{
+      -fx-font-family: "Roboto", sans-serif;
+    -fx-line-spacing: -5px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 22px;
+    -fx-aligment:center;
+    -fx-font-weight: bold;
+}
+.regular-btn{
+    -fx-alignment: CENTER;  /* Equivalent to align-items: center */
+    -fx-background-color: white;  /* Background color */
+    -fx-border-color: rgba(0, 0, 0, 0.1);  /* Border color */
+    -fx-border-radius: 0.25em;  /* Border radius */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.02), 0, 1, 3, 0);  /* Subtle shadow */
+    -fx-padding: 0.875em 1.5em;  /* Padding */
+    -fx-font-family: system, "Helvetica Neue", Helvetica, Arial, sans-serif;  /* Font family */
+    -fx-font-size: 14px;  
+    -fx-font-weight: bold;  /* Font weight (equivalent to 600) */
+    -fx-cursor: hand;  /* Cursor on hover */
+    -fx-text-fill: rgba(59, 59, 59, 0.85);  /* Text color */
+}
