@@ -35,7 +35,7 @@ public class Utilities implements Serializable {
     // Set up the logger with file output
     private void setupLogger() {
         try {
-            fileHandler = new FileHandler("utilities.log", true); 
+            fileHandler = new FileHandler("session.log", true); 
             fileHandler.setFormatter(new SimpleFormatter());
             logger.addHandler(fileHandler);
             logger.setLevel(Level.ALL); 
@@ -57,7 +57,7 @@ public class Utilities implements Serializable {
         try (ObjectOutputStream exit = new ObjectOutputStream(new FileOutputStream(file))) {
             exit.writeObject(object);
         } catch (IOException e) {
-            writeLog("Failed to serialize object to XML: " + e.getMessage(), Level.SEVERE);
+            writeLog("Failed to serialize object to XML: " + e.getMessage(), Level.WARNING);
             throw e;
         }
     }
@@ -68,7 +68,7 @@ public class Utilities implements Serializable {
         try (ObjectInputStream entrance = new ObjectInputStream(new FileInputStream(file))) {
             return entrance.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            writeLog("Failed to deserialize object from XML: " + e.getMessage(), Level.SEVERE);
+            writeLog("Failed to deserialize object from XML: " + e.getMessage(), Level.WARNING);
             throw e;
         }
     }
@@ -79,7 +79,7 @@ public class Utilities implements Serializable {
         try (ObjectOutputStream exit = new ObjectOutputStream(new FileOutputStream(file))) {
             exit.writeObject(object);
         } catch (IOException e) {
-            writeLog("Failed to serialize object to DAT: " + e.getMessage(), Level.SEVERE);
+            writeLog("Failed to serialize object to DAT: " + e.getMessage(), Level.WARNING);
             throw e;
         }
     }
@@ -90,7 +90,7 @@ public class Utilities implements Serializable {
         try (ObjectInputStream entrance = new ObjectInputStream(new FileInputStream(file))) {
             return entrance.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            writeLog("Failed to deserialize object from DAT: " + e.getMessage(), Level.SEVERE);
+            writeLog("Failed to deserialize object from DAT: " + e.getMessage(), Level.WARNING);
             throw e;
         }
     }

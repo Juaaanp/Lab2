@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import java.util.logging.Level;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,12 +28,11 @@ public class LoginController {
 
     private ResourceBundle bundle;
 
-    public void setResourceBundle(ResourceBundle bundle) {
-        this.bundle = bundle;
-    }
 
     @FXML
     public void eventOnAction(@SuppressWarnings("exports") Event event) throws IOException, ClassNotFoundException {
+        Utilities.getInstance().writeLog("Checking for the User credentials",Level.INFO);
+
         Object evt = event.getSource();
         Alert alert = new Alert(Alert.AlertType.ERROR);
         @SuppressWarnings("unchecked")
@@ -44,9 +44,9 @@ public class LoginController {
                 boolean userFound = false;
                 for (LocalUser localUser : localUsers) {
                     if (localUser.getId().equals(idTF.getText())) {
-                        if (bundle == null) {
-                            bundle = App.getBundle();
-                        }
+                        // if (bundle == null) {
+                        //     bundle = App.getBundle();
+                        // }
                         loadStage("user.fxml", event, bundle);
                         userFound = true;
                         break;
@@ -73,6 +73,7 @@ public class LoginController {
     @FXML
     private void loadStage(String url, Event event, ResourceBundle bundle) {
         try {
+            Utilities.getInstance().writeLog("Scene " + url + " loaded.", Level.INFO);
             Window window = ((javafx.scene.Node) (event.getSource())).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource(url), bundle);
             Parent root = loader.load();
@@ -81,6 +82,7 @@ public class LoginController {
             newStage.setScene(scene);
             newStage.show();
         } catch (Exception e) {
+            Utilities.getInstance().writeLog("Failed to load the " + url + " Scene " + e.getMessage() , Level.WARNING);
             e.printStackTrace();
         }
     }
@@ -93,6 +95,9 @@ public class LoginController {
             }
             loadStage("signUp.fxml", event, bundle);
         }
+    }
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle= bundle;
     }
 }
 

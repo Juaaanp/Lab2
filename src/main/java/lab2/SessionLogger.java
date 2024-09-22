@@ -9,12 +9,12 @@ public class SessionLogger {
 
     static {
         try {
-            fileHandler = new FileHandler("application.log", true); // 'true' to append to the log file
+            fileHandler = new FileHandler("application.log", true); 
             fileHandler.setFormatter(new SimpleFormatter()); 
 
             logger.addHandler(fileHandler);
 
-            logger.setLevel(Level.ALL); // Log all levels
+            logger.setLevel(Level.ALL); 
 
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Failed to initialize log file handler", e);

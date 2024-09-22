@@ -3,7 +3,6 @@ package lab2;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,6 @@ public class StartedController {
     private ResourceBundle bundle;
     private Locale currentLocale;
 
-
     @SuppressWarnings("deprecation")
     @FXML
     public void initialize() {
@@ -45,6 +43,7 @@ public class StartedController {
                 currentLocale = new Locale("en", "US");
             }
             bundle = ResourceBundle.getBundle("lab2.messages", currentLocale);
+            App.setBundle(bundle);
             updateLabels(bundle); 
         });
     }
@@ -64,15 +63,19 @@ public class StartedController {
             Parent root = loader.load();
 
             LoginController controller = loader.getController();
-            controller.setResourceBundle(bundle);
+            controller.setBundle(bundle);
 
             Stage stage = (Stage) continueButton.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            Utilities.getInstance().writeLog("Failed to load the Login Scene " + e.getMessage() , Level.SEVERE);
+            Utilities.getInstance().writeLog("Failed to load the Login Scene " + e.getMessage() , Level.WARNING);
             e.printStackTrace();
         }
     }
+
+    public ResourceBundle getBundle(){
+        return bundle;
+    } 
 }

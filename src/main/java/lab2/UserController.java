@@ -2,6 +2,7 @@ package lab2;
 
 import java.util.ResourceBundle;
 
+import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -33,15 +34,20 @@ public class UserController {
     }
     @FXML
     public void cancel(@SuppressWarnings("exports") ActionEvent event){
+        Utilities.getInstance().writeLog("Cancel action perfomed with errors", Level.INFO);
+
         if (bundle == null) {
             bundle = App.getBundle();
         }
+
         loadStage("login.fxml", event, bundle);
     }
 
     @FXML
     private void loadStage(String url, Event event, ResourceBundle bundle) {
+           
         try {
+            Utilities.getInstance().writeLog("Scene " + url + " loaded.", Level.INFO);
             Window window = ((javafx.scene.Node) (event.getSource())).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource(url), bundle);
             Parent root = loader.load();
@@ -50,7 +56,11 @@ public class UserController {
             newStage.setScene(scene);
             newStage.show();
         } catch (Exception e) {
+            Utilities.getInstance().writeLog("Failed to load the " + url + " Scene " + e.getMessage() , Level.WARNING);
             e.printStackTrace();
         }
+    }
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle= bundle;
     }
 }

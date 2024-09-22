@@ -9,22 +9,22 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 public class App extends Application {
     private static ResourceBundle bundle;
 
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
-        @SuppressWarnings("deprecation")
-        Locale locale = new Locale("en", "US");
-        bundle = ResourceBundle.getBundle("lab2.messages", locale);
+        // @SuppressWarnings("deprecation")
+        // Locale locale = new Locale("en", "US");
+        // bundle = ResourceBundle.getBundle("lab2.messages", locale);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("started-menu.fxml"), bundle);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("started-menu.fxml"));
         Parent root = loader.load();
 
-        // StartedController controller = loader.getController();
-
+        StartedController controller = loader.getController();
+        setBundle(controller.getBundle());
+        // controller.setLocale(locale);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -36,5 +36,8 @@ public class App extends Application {
 
     public static ResourceBundle getBundle() {
         return bundle;
+    }
+    public static void setBundle (ResourceBundle bundle) {
+        App.bundle = bundle;
     }
 }

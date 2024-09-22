@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import java.util.logging.Level;
 import lab2.Models.LocalUser;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -48,11 +49,13 @@ public class SignUpController implements Initializable {
         String role = emailTF.getText();
 
         LocalUser localUser = new LocalUser(id, name, email, role);
-
+        Utilities.getInstance().writeLog("New User created.",Level.INFO);
         try {
+            Utilities.getInstance().writeLog("Searching for the User List.",Level.INFO);
             localUsers = (ArrayList<LocalUser>) Utilities.getInstance().deserializeObjectXML("localUsers.xml");
         } catch (FileNotFoundException e) {
             localUsers = new ArrayList<>();
+            Utilities.getInstance().writeLog("No Users List found: " + e.getMessage() , Level.WARNING);
         }
         localUsers.add(localUser);
 
@@ -62,6 +65,7 @@ public class SignUpController implements Initializable {
         alert.setHeaderText(null);
         alert.setTitle("Info");
         alert.setContentText("You have been registered successfully");
+        Utilities.getInstance().writeLog("User added correctly to the users List.",Level.INFO);
         alert.showAndWait();
     }
 
